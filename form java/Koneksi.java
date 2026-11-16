@@ -5,9 +5,9 @@ import javax.swing.JOptionPane;
 
 public class Koneksi {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/db_penggajian";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "postgres";
+    private static final String URL = "jdbc:mysql://localhost:3307/db_penggajian?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "syibran19";
 
     public static Connection configDB() throws SQLException {
         try {
@@ -15,7 +15,7 @@ public class Koneksi {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(
                 null,
-                "Koneksi PostgreSQL gagal: " + e.getMessage(),
+                "Koneksi MySQL gagal: " + e.getMessage(),
                 "Kesalahan Koneksi",
                 JOptionPane.ERROR_MESSAGE
             );
