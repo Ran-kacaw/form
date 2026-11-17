@@ -7,7 +7,7 @@ public class Koneksi {
 
     private static final String URL = "jdbc:mysql://localhost:3307/db_penggajian?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "syibran19";
+    private static final String PASSWORD = "";
 
     public static Connection configDB() throws SQLException {
         try {

@@ -243,6 +243,7 @@ public class form {
     private void handleBelumMenikah() {
         if (OpBelumMenikah.isSelected()) {
             txtJumlahAnak.setEditable(false);
+            txtJumlahAnak.setText("");
         }
     }
 
@@ -331,7 +332,12 @@ public class form {
         model = new DefaultTableModel(
             new Object[]{"NIP", "Nama", "Jenis Kelamin", "Status", "Jml Anak", "Golongan", "Tunjangan", "Gaji Pokok", "Pajak", "Potongan", "Gaji Bersih"},
             0
-        );
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         tbGaji.setModel(model);
 
         // === DATABASE CONNECTION START: memuat data gaji ===
@@ -372,7 +378,10 @@ public class form {
         if (txtNip.getText().trim().isEmpty() || txtNama.getText().trim().isEmpty()
                 || (!OpPria.isSelected() && !OpWanita.isSelected())
                 || (!OpMenikah.isSelected() && !OpBelumMenikah.isSelected())
-                || cbGolongan.getSelectedIndex() < 0 || txtGajiBersih.getText().trim().isEmpty()) {
+                || (OpMenikah.isSelected() && txtJumlahAnak.getText().trim().isEmpty())
+                || cbGolongan.getSelectedIndex() < 0
+                || txtGapok.getText().trim().isEmpty()
+                || txtGajiBersih.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(window, "Lengkapi semua data dan klik Hitung terlebih dahulu!");
             return;
         }
@@ -410,10 +419,13 @@ public class form {
 
     // UPDATE: Mengubah data berdasarkan NIP.
     private void ubahData() {
-        if (txtNip.getText().trim().isEmpty() || txtGajiBersih.getText().trim().isEmpty()
-                || cbGolongan.getSelectedIndex() < 0
+        if (txtNip.getText().trim().isEmpty() || txtNama.getText().trim().isEmpty()
                 || (!OpPria.isSelected() && !OpWanita.isSelected())
-                || (!OpMenikah.isSelected() && !OpBelumMenikah.isSelected())) {
+                || (!OpMenikah.isSelected() && !OpBelumMenikah.isSelected())
+                || (OpMenikah.isSelected() && txtJumlahAnak.getText().trim().isEmpty())
+                || cbGolongan.getSelectedIndex() < 0
+                || txtGapok.getText().trim().isEmpty()
+                || txtGajiBersih.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(window, "Pilih data dari tabel, lengkapi data, dan klik Hitung sebelum mengubah!");
             return;
         }
